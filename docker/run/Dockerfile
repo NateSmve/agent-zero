@@ -2,6 +2,9 @@
 # FROM agent-zero-base:local
 FROM agent0ai/agent-zero-base:latest
 
+  # Fix numpy/scipy compatibility issue
+  RUN pip install 'numpy<2.0'
+
 # Check if the argument is provided, else throw an error
 ARG BRANCH
 RUN if [ -z "$BRANCH" ]; then echo "ERROR: BRANCH is not set!" >&2; exit 1; fi
