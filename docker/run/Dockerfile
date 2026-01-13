@@ -3,9 +3,9 @@
 FROM agent0ai/agent-zero-base:latest
 
   # Fix numpy/scipy compatibility issue
- RUN /opt/venv-a0/bin/pip install 'numpy<2.0' && /opt/venv-a0/bin/pip install --force-reinstall scipy
-
-# Check if the argument is provided, else throw an error
+  RUN /opt/venv-a0/bin/pip install 'numpy<2.0' && \
+      /opt/venv-a0/bin/pip install --force-reinstall \
+      $(/opt/venv-a0/bin/pip list --format=freeze | grep -iE "scipy|scikit|sklearn" | cut -d= -f1)# Check if the argument is provided, else throw an error
 ARG BRANCH
 RUN if [ -z "$BRANCH" ]; then echo "ERROR: BRANCH is not set!" >&2; exit 1; fi
 ENV BRANCH=$BRANCH
