@@ -3,7 +3,8 @@
 FROM agent0ai/agent-zero-base:latest
 
   # Fix numpy/scipy compatibility issue
-RUN /opt/venv-a0/bin/pip install --upgrade scipy scikit-learn accelerateARG BRANCH
+RUN /opt/venv-a0/bin/pip install --upgrade scipy scikit-learn accelerate
+ARG BRANCH
 RUN if [ -z "$BRANCH" ]; then echo "ERROR: BRANCH is not set!" >&2; exit 1; fi
 ENV BRANCH=$BRANCH
 
